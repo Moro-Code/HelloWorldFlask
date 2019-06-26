@@ -126,7 +126,7 @@ $ pip install gunicorn
 Then run the app with it
 
 ```sh
-$ gunicorn -w 4 app:app
+$ gunicorn -w 4 app:app --deamon
 ```
 This will start a gunicorn deamon with 4 workers on port 8000
 
@@ -137,11 +137,11 @@ We will do a very simple NGINX configuration
 ```nginx
 server {
    listen 80;
-   server_name myurl.com;
+   server_name _;
    access_log /var/log/nginx/example.log
 
    location / {
-      proxy_pass http://127.0.0.1:8000
+      proxy_pass http://127.0.0.1:8000;
       proxy_set_header Host $host;
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
    }
